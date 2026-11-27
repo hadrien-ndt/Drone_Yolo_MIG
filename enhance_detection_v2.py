@@ -26,7 +26,7 @@ def intersection_over_unit(detections: list[Detection], seuil=0.65) -> list[Dete
         intersection = np.maximum(0, x2 - x1)*np.maximum(0, y2 - y1)
         union = areas[:, None] + areas[None, :] - intersection
         iou_mat = np.divide(intersection, union, out=np.zeros_like(intersection), where=union > 0)
-        print("matrice iou = ", iou_mat, "\n")
+        
         new_detections = detections.copy()
 
         for i in range(len(detections)):
@@ -37,7 +37,6 @@ def intersection_over_unit(detections: list[Detection], seuil=0.65) -> list[Dete
                             new_detections.remove(detections[i])
                         else:
                             new_detections.remove(detections[j])
-        print(len(new_detections), "\n \n \n")
         return new_detections
     return []
 

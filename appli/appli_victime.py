@@ -120,6 +120,7 @@ def ouvrir_avec_systeme(chemin: Path) -> None:
 class AppliVictime(tk.Tk):
     def __init__(self, dossier: Path):
         super().__init__()
+        self.iconbitmap('appli\img\drone_icon.ico')
         self.dossier = Path(dossier)
         self.cartes: list[tk.Widget] = []
         self.geometry("1120x720")
@@ -149,9 +150,9 @@ class AppliVictime(tk.Tk):
         entete = ttk.Frame(self)
         entete.pack(fill="x", padx=18, pady=(14, 8))
         entete.columnconfigure(0, weight=1)
-        ttk.Label(entete, text="Appli Victime", style="Titre.TLabel").grid(row=0, column=0, sticky="w")
-        self.lbl_dossier = ttk.Label(entete, text=str(self.dossier), style="SousTitre.TLabel")
-        self.lbl_dossier.grid(row=1, column=0, sticky="w", pady=(2, 0))
+        ttk.Label(entete, text="VicRec — Reconnaissance de personnes en détresse", style="Titre.TLabel").grid(row=0, column=0, sticky="w")
+        # self.lbl_dossier = ttk.Label(entete, text=str(self.dossier), style="SousTitre.TLabel")
+        # self.lbl_dossier.grid(row=1, column=0, sticky="w", pady=(2, 0))
         boutons = ttk.Frame(entete)
         boutons.grid(row=0, column=1, rowspan=2, sticky="e")
         ttk.Button(boutons, text="Choisir un dossier…",
@@ -186,8 +187,8 @@ class AppliVictime(tk.Tk):
         for carte in self.cartes:
             carte.destroy()
         self.cartes = []
-        self.title(f"Appli Victime — {self.dossier.name}")
-        self.lbl_dossier.config(text=str(self.dossier))
+        self.title(f"VicRec")
+        # self.lbl_dossier.config(text=str(self.dossier))
         self.canvas.yview_moveto(0)
         if not self.dossier.is_dir():
             self.lbl_statut.config(text=f"Dossier introuvable : {self.dossier}")
